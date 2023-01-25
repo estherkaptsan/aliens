@@ -12,10 +12,3 @@ function getClassName(location) {
     const cellClass = 'cell-' + location.i + '-' + location.j
     return cellClass
 }
-
-// TODO: delete ??
-function renderCell(location, value) { 
-    const cellSelector = '.' + getClassName(location) 
-    const elCell = document.querySelector(cellSelector)
-    elCell.innerHTML = value
-}
