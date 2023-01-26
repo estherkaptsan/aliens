@@ -1,8 +1,8 @@
 'use strict'
 // -----------------------------------------------------------------------
-const BOARD_SIZE = 14;
+const BOARD_SIZE = 10;
 const ALIENS_ROW_LENGTH = 4
-const ALIENS_ROW_COUNT = 2
+const ALIENS_ROW_COUNT = 3
 const HERO = '♆';
 const ALIEN = '👽';
 const LASER = '⤊';
@@ -15,20 +15,19 @@ var gGame = {
     aliensCount: 0
 }
 var gBoard = buildBoard()
-// console.table(gBoard)
+
 // -----------------------------------------------------------------------
 function onInit() {
-    gHero = { pos: { i: 12, j: 5 }, isShoot: false }
+    clearHero()
+    gHero = { pos: { i: BOARD_SIZE - 2, j: BOARD_SIZE / 2 }, isShoot: false }
     gGame.isOn = true
-    gPoints = 0
-
+    gPoints = 0 
+    clearAliensRemained()
     createAliens(gBoard)
     createHero(gBoard)
     renderBoard(gBoard)
-
-    // gIntervalAliens = setInterval(moveAliens, 1000)
-    moveAliens()
-    
+    moveAliens()   
+    printPoints(0)
     hideModal()
 }
 
@@ -38,7 +37,7 @@ function buildBoard() {
         board[i] = []
         for (var j = 0; j < BOARD_SIZE; j++) {
             var currCell = board[i][j] = createCell()
-            if (i === BOARD_SIZE - 1) currCell.type = EARTH // i === BOARD_SIZE - 2 || 
+            if (i === BOARD_SIZE - 1) currCell.type = EARTH  
         }
     }
     return board
@@ -68,7 +67,6 @@ function renderBoard(board) {
     elBoard.innerHTML = strHTML
 }
 
-// position such as: {i: 2, j: 7} 
 function updateCell(pos, gameObject = null) {
     gBoard[pos.i][pos.j].gameObject = gameObject;
     var elCell = getElCell(pos);
@@ -76,14 +74,11 @@ function updateCell(pos, gameObject = null) {
 }
 
 function isWin() {
-    return gAlienCount === 0
+    return gAliens.length === 0
 }
 
 function gameOver() {
-    // clean hero to next game
-    gBoard[gHero.pos.i][gHero.pos.j].gameObject = null
-    updateCell(gHero.pos, null)
-
+    gGame.isOn = false
     createModal()
     clearInterval(gLaserInterval)
 }
@@ -107,3 +102,16 @@ function printPoints(diff) {
     elH2.innerHTML = gPoints
 }
 
+function clearAliensRemained() {
+    if(!gAliens) return
+    for (var i = 0; i < gAliens.length; i++) {
+        gAliens[i].gameObject = null
+        updateCell({ i: gAliens[i].location.i, j: gAliens[i].location.j }, null)
+    }
+}
+
+function clearHero(){
+    if(!gHero) return
+    gBoard[gHero.pos.i][gHero.pos.j].gameObject = null
+    updateCell(gHero.pos, null)
+}
