@@ -8,12 +8,11 @@ const ALIEN = '👽';
 const LASER = '⤊';
 const SKY = 'SKY'
 const EARTH = 'EARTH'
-// var gHero
 
 var gPoints
 var gGame = {
     isOn: false,
-    aliensCount: 0 // isVictory when aliensCount = 0
+    aliensCount: 0
 }
 var gBoard = buildBoard()
 // console.table(gBoard)
@@ -100,9 +99,8 @@ function hideModal() {
 }
 
 function printPoints(diff) {
-    debugger
     gPoints += diff
     var elH2 = document.querySelector('h2 span')
-    elH2.innerHTML = diff
+    elH2.innerHTML = gPoints
 }
 

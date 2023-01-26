@@ -11,21 +11,34 @@ var gAliensTopRowIdx;
 var gAliensBottomRowIdx;
 var gIsAlienFreeze = true;
 
-function createAliens(board) { 
+function createAliens(board) {
     gAlienCount = 7
     for (var i = 0; i < gAlienCount; i++) {
         board[2][i].gameObject = ALIEN
     }
 }
 
-function handleAlienHit(pos) { }
-function shiftBoardRight(board, fromI, toI) { }
-function shiftBoardLeft(board, fromI, toI) { }
-function shiftBoardDown(board, fromI, toI) { }
+function handleAlienHit(pos) {
+    
+}
+
+function shiftBoardRight(board, fromI, toI) {
+
+}
+
+function shiftBoardLeft(board, fromI, toI) {
+
+}
+
+function shiftBoardDown(board, fromI, toI) {
+
+}
 
 // runs the interval for moving aliens side to side and down 
 // it re-renders the board every time
 // when the aliens are reaching the hero row - interval stops 
 
-function moveAliens() { }
+function moveAliens() {
+
+}
 

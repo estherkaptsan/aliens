@@ -1,5 +1,10 @@
+'use strict'
+
 const LASER_SPEED = 80;
-var gHero = { pos: { i: 12, j: 5 }, isShoot: false };
+var gHero = {
+    pos: { i: 12, j: 5 },
+    isShoot: false
+}
 var gLaserInterval
 var laser_I
 
