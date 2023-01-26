@@ -1,8 +1,8 @@
 'use strict'
 // -----------------------------------------------------------------------
 const BOARD_SIZE = 14;
-const ALIENS_ROW_LENGTH = 8
-const ALIENS_ROW_COUNT = 3
+const ALIENS_ROW_LENGTH = 4
+const ALIENS_ROW_COUNT = 2
 const HERO = '♆';
 const ALIEN = '👽';
 const LASER = '⤊';
@@ -26,6 +26,9 @@ function onInit() {
     createHero(gBoard)
     renderBoard(gBoard)
 
+    // gIntervalAliens = setInterval(moveAliens, 1000)
+    moveAliens()
+    
     hideModal()
 }
 

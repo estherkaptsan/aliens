@@ -36,3 +36,6 @@ td{
   .show {
     display: block;
   }
+  .restart-btn{
+    margin-bottom: 20px;
+  }

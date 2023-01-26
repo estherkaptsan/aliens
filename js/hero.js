@@ -72,8 +72,12 @@ function blinkLaser(laser_J) {
         cellUpdateLaser_I === 0) {
 
         if (gBoard[cellUpdateLaser_I][cellUpdateLaser_J].gameObject === ALIEN) {
+            // console.log(gAliens)
+            // console.log(cellUpdateLaser_I,cellUpdateLaser_J )
+
             printPoints(10)
             gAlienCount--
+            // console.log(gAlienCount)
             if (isWin()) gameOver()
         }
 
