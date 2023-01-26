@@ -1,7 +1,7 @@
 'use strict'
 
 const ALIEN_SPEED = 300;
-var gAliens; 
+var gAliens;
 var gIsAlienFreeze = true;
 var gSetIntervalAliens;
 
@@ -31,7 +31,7 @@ function createAlien(i, j) {
 function handleAlienHit(pos_I, pos_J) {
 
     for (var i = 0; i < gAliens.length; i++) {
-        if(gAliens[i].location.i === pos_I && gAliens[i].location.j === pos_J){
+        if (gAliens[i].location.i === pos_I && gAliens[i].location.j === pos_J) {
             gAliens.splice(i, 1)
             break
         }
@@ -64,7 +64,7 @@ function shiftBoardRight() {
     }
 }
 
-function shiftBoardLeft(board, fromI, toI) {
+function shiftBoardLeft() {
     for (var i = 0; i < gAliens.length; i++) {
 
         var oldLoc_I = gAliens[i].location.i
@@ -117,8 +117,12 @@ function shiftBoardDown(direction) {
     clearInterval(gSetIntervalAliens)
 
     switch (direction) {
-        case 'toLeft': gSetIntervalAliens = setInterval(shiftBoardLeft, ALIEN_SPEED); break;
-        case 'toRight': gSetIntervalAliens = setInterval(shiftBoardRight, ALIEN_SPEED); break;
+        case 'toLeft':
+            gSetIntervalAliens = setInterval(shiftBoardLeft, ALIEN_SPEED);
+            break;
+        case 'toRight':
+            gSetIntervalAliens = setInterval(shiftBoardRight, ALIEN_SPEED);
+            break;
     }
 }
 

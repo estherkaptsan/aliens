@@ -1,11 +1,12 @@
 'use strict'
 // -----------------------------------------------------------------------
-const BOARD_SIZE = 10;
+const BOARD_SIZE = 14
 const ALIENS_ROW_LENGTH = 4
-const ALIENS_ROW_COUNT = 3
+const ALIENS_ROW_COUNT = 4
 const HERO = '♆';
 const ALIEN = '👽';
-const LASER = '⤊';
+const LASER_1 = '⤊';
+const LASER_2 = '^'
 const SKY = 'SKY'
 const EARTH = 'EARTH'
 
@@ -26,7 +27,9 @@ function onInit() {
     createAliens(gBoard)
     createHero(gBoard)
     renderBoard(gBoard)
-    moveAliens()   
+    clearInterval(gLaserInterval) 
+    clearInterval(gSetIntervalAliens) 
+    moveAliens()       
     printPoints(0)
     hideModal()
 }
@@ -114,4 +117,9 @@ function clearHero(){
     if(!gHero) return
     gBoard[gHero.pos.i][gHero.pos.j].gameObject = null
     updateCell(gHero.pos, null)
+}
+
+function restartGame() {
+    gameOver()
+    onInit()
 }
