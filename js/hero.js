@@ -13,8 +13,7 @@ function createHero(board) {
 }
 
 function onKeyDown(ev) {
-    console.log(ev.key);
-    if (isWin()) return
+     if (isWin()) return
 
     const i = gHero.pos.i
     const j = gHero.pos.j
@@ -40,16 +39,16 @@ function onKeyDown(ev) {
 
 function moveHero(dir) {
     var currHeroPos = gHero.pos
-    var nextHeroPosI = currHeroPos.i
-    var nextHeroPosJ = currHeroPos.j + dir
+    var nextHeroPos_I = currHeroPos.i
+    var nextHeroPos_J = currHeroPos.j + dir
 
-    if (nextHeroPosJ < 0 || nextHeroPosJ > BOARD_SIZE - 1) return
+    if (nextHeroPos_J < 0 || nextHeroPos_J > BOARD_SIZE - 1) return
 
     gBoard[currHeroPos.i][currHeroPos.j].gameObject = null
     updateCell(currHeroPos, null)
 
-    gHero.pos = { i: nextHeroPosI, j: nextHeroPosJ }
-    gBoard[nextHeroPosI][nextHeroPosJ].gameObject = HERO
+    gHero.pos = { i: nextHeroPos_I, j: nextHeroPos_J }
+    gBoard[nextHeroPos_I][nextHeroPos_J].gameObject = HERO
     updateCell(gHero.pos, HERO)
 }
 
@@ -77,13 +76,16 @@ function blinkLaser(laser_J) {
     var cellRemoveLaser_I = cellUpdateLaser_I + 1
     var cellRemoveLaser_J = laser_J
 
+    if(gBoard[cellUpdateLaser_I][cellUpdateLaser_J].gameObject === CANDY) {
+        printPoints(50)
+    }
+
     if (gBoard[cellUpdateLaser_I][cellUpdateLaser_J].gameObject === ALIEN ||
         cellUpdateLaser_I === 0) {
 
         if (gBoard[cellUpdateLaser_I][cellUpdateLaser_J].gameObject === ALIEN) {
             handleAlienHit(cellUpdateLaser_I, cellUpdateLaser_J)
             if(gNPressed) blowupNegs(cellUpdateLaser_I, cellUpdateLaser_J)            
-            printPoints(10)
             if (isWin()) gameOver()
         }
 

@@ -1,36 +1,38 @@
 body{
     text-align: center;
+    font-family: Aharoni;
+    background-color: #a9d6e5;
+    color: #014f86;
 }
-
+h1{
+    font-size: 50px;
+}
 table{
     margin: auto;
-
 }
-
 td{
     width: 30px;
     height: 30px;
-    background-color: rgb(186, 179, 171);
+    background-color: #78c6a3;
 }
 .sky{
     background-color: rgb(186, 179, 171);
-
+    background-color: #89c2d9;
 }
 .earth{
-    background-color: brown;
-
+    background-color: #012a4a;
 }
 .modal {
     text-align: center;
     display: none;
-    background-color: black;
+    background-color: #012a4a;
     color: aliceblue;
-    border: 5px solid white;
+    border: 4px solid #78c6a3;
     width: 300px;
     padding: 20px;
   
     position: absolute;
-    top: 500px;
+    top: 350px;
     left: calc(50% - 175px);
   }
   .show {
@@ -38,4 +40,9 @@ td{
   }
   .restart-btn{
     margin-bottom: 20px;
+    border-color: #78c6a3;
+    color: #012a4a;
+    width: 90px;
+    height: 50px;
+    background-color: #a9d6e5;
   }

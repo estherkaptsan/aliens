@@ -1,18 +1,20 @@
 'use strict'
 // -----------------------------------------------------------------------
 const BOARD_SIZE = 14
-const ALIENS_ROW_LENGTH = 4
+const ALIENS_ROW_LENGTH = 7
 const ALIENS_ROW_COUNT = 4
 const HERO = '♆';
-const ALIEN = '👽';
+var ALIEN = '👽';
 const LASER_1 = '⤊';
 const LASER_2 = '^'
 const SKY = 'SKY'
 const EARTH = 'EARTH'
+const CANDY = '🍭'
 
+var gCandyInterval
 var gPoints
 var gGame = {
-    isOn: false,
+    isOn: false, 
     aliensCount: 0
 }
 var gBoard = buildBoard()
@@ -22,16 +24,18 @@ function onInit() {
     clearHero()
     gHero = { pos: { i: BOARD_SIZE - 2, j: BOARD_SIZE / 2 }, isShoot: false }
     gGame.isOn = true
-    gPoints = 0 
+    gPoints = 0
     clearAliensRemained()
     createAliens(gBoard)
     createHero(gBoard)
     renderBoard(gBoard)
-    clearInterval(gLaserInterval) 
-    clearInterval(gSetIntervalAliens) 
+    clearInterval(gLaserInterval)
+    clearInterval(gSetIntervalAliens)
     moveAliens()       
     printPoints(0)
     hideModal()
+    gCandyInterval = setInterval(addCandy, 10000)
+    addCandy()
 }
 
 function buildBoard() {
@@ -40,7 +44,7 @@ function buildBoard() {
         board[i] = []
         for (var j = 0; j < BOARD_SIZE; j++) {
             var currCell = board[i][j] = createCell()
-            if (i === BOARD_SIZE - 1) currCell.type = EARTH  
+            if (i === BOARD_SIZE - 1) currCell.type = EARTH
         }
     }
     return board
@@ -84,6 +88,7 @@ function gameOver() {
     gGame.isOn = false
     createModal()
     clearInterval(gLaserInterval)
+    clearInterval(gCandyInterval)
 }
 
 function createModal() {
@@ -106,15 +111,15 @@ function printPoints(diff) {
 }
 
 function clearAliensRemained() {
-    if(!gAliens) return
+    if (!gAliens) return
     for (var i = 0; i < gAliens.length; i++) {
         gAliens[i].gameObject = null
         updateCell({ i: gAliens[i].location.i, j: gAliens[i].location.j }, null)
     }
 }
 
-function clearHero(){
-    if(!gHero) return
+function clearHero() {
+    if (!gHero) return
     gBoard[gHero.pos.i][gHero.pos.j].gameObject = null
     updateCell(gHero.pos, null)
 }
@@ -122,4 +127,16 @@ function clearHero(){
 function restartGame() {
     gameOver()
     onInit()
+}
+
+function addCandy() {
+    var randomIdx = getRandomIntInclusive(0, gBoard.length - 1)
+
+    gBoard[0][randomIdx].gameObject = CANDY
+    updateCell({ i: 0, j: randomIdx }, CANDY)
+
+    setTimeout(() => {
+        gBoard[0][randomIdx].gameObject = null
+        updateCell({ i: 0, j: randomIdx }, null)
+    }, 5000)
 }
